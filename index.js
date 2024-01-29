@@ -1,14 +1,17 @@
-const { Bot, Telegram, Commands, Message } = require("@telegraf/telegraf");
+const { Telegraf } = require('telegraf');
 
-const bot = new Bot({
-  token: process.env.BOT_TOKEN,
-  group: process.env.GROUP_ID,
+const bot = new Telegraf(process.env.BOT_TOKEN);
+
+bot.start((ctx) => {
+  ctx.reply('Привет! Я чат-бот на Node.js.');
 });
 
-bot.on("message", (message) => {
-  if (message.text === "/start") {
-    message.reply("Привет! Я твой Telegram-бот.");
-  }
+bot.on('text', (ctx) => {
+  ctx.reply(`Вы написали: ${ctx.message.text}`);
 });
 
-bot.start();
+bot.help((ctx) => {
+  ctx.reply('Это простой чат-бот. Отправьте текстовое сообщение, и я отвечу на него.');
+});
+
+bot.launch();
