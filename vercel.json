@@ -1,10 +1,15 @@
 {
-  "version": 2,
-  "builds": [
-    { "src": "index.js", "use": "@vercel/node" }
+  "target": "serverless",
+  "framework": "node",
+  "plugins": [
+    {
+      "name": "@vercel/node",
+      "options": {
+        "node_modules_folder": ".vercel/node_modules"
+      }
+    }
   ],
-  "routes": [
-    { "src": "/api/(.*)", "dest": "/api/$1" },
-    { "handle": "filesystem" }
-  ]
+  "functions": {
+    "index": "index.js"
+  }
 }

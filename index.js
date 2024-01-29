@@ -1,38 +1,14 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const TelegramBot = require('node-telegram-bot-api');
+const { Bot, Telegram, Commands, Message } = require("@telegraf/telegraf");
 
-const token = '6409534713:AAEnHxLbb7OF_JC0nY5dHTN4Ff4vrkUEQtI';
-const webhookUrl = 'https://ban-master-2000-bot.vercel.app/';
-
-const app = express();
-const port = process.env.PORT || 3000;
-const bot = new TelegramBot(token);
-
-app.use(bodyParser.json());
-
-app.get('/', (req, res) => {
-	res.json('🦄🌈✨👋🌎🌍🌏✨🌈🦄');
+const bot = new Bot({
+  token: process.env.BOT_TOKEN,
+  group: process.env.GROUP_ID,
 });
 
-app.post(`/api/webhook/${token}`, (req, res) => {
-  bot.processUpdate(req.body);
-  res.sendStatus(200);
-});
-
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
-
-bot.setWebHook(`${webhookUrl}/api/webhook/${token}`);
-
-bot.on('message', (msg) => {
-  const chatId = msg.chat.id;
-
-  if (msg.text) {
-    bot.sendMessage(chatId, `Вы отправили: ${msg.text}`);
+bot.on("message", (message) => {
+  if (message.text === "/start") {
+    message.reply("Привет! Я твой Telegram-бот.");
   }
 });
 
-console.log('Бот запущен!');
-module.exports = app;
+bot.start();
