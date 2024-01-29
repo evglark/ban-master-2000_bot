@@ -1,3 +1,4 @@
+const http = require('http');
 const express = require('express');
 const bodyParser = require('body-parser');
 const TelegramBot = require('node-telegram-bot-api');
@@ -16,9 +17,11 @@ app.post(`/api/webhook/${token}`, (req, res) => {
   res.sendStatus(200);
 });
 
+const server = http.createServer(app);
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+
+server.listen(PORT, async (err) => {
+	console.log(`Server is running on port ${port}`);
 });
 
 bot.setWebHook(`${webhookUrl}/api/webhook/${token}`);
@@ -32,4 +35,3 @@ bot.on('message', (msg) => {
 });
 
 console.log('Бот запущен!');
-module.exports = app;
