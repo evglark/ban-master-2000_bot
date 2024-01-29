@@ -32,3 +32,4 @@ bot.on('message', (msg) => {
 });
 
 console.log('Бот запущен!');
+module.exports = app;
