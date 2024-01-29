@@ -11,7 +11,7 @@ const app = express();
 
 app.use(bodyParser.json());
 
-app.post(`/webhook/${token}`, (req, res) => {
+app.post(`/api/webhook/${token}`, (req, res) => {
   bot.processUpdate(req.body);
   res.sendStatus(200);
 });
@@ -21,7 +21,7 @@ app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
 
-bot.setWebHook(`${webhookUrl}/webhook/${token}`);
+bot.setWebHook(`${webhookUrl}/api/webhook/${token}`);
 
 bot.on('message', (msg) => {
   const chatId = msg.chat.id;
