@@ -1,4 +1,3 @@
-const http = require('http');
 const express = require('express');
 const bodyParser = require('body-parser');
 const TelegramBot = require('node-telegram-bot-api');
@@ -6,9 +5,9 @@ const TelegramBot = require('node-telegram-bot-api');
 const token = '6409534713:AAEnHxLbb7OF_JC0nY5dHTN4Ff4vrkUEQtI';
 const webhookUrl = 'https://ban-master-2000-bot.vercel.app/';
 
-const bot = new TelegramBot(token);
-
 const app = express();
+const port = process.env.PORT || 3000;
+const bot = new TelegramBot(token);
 
 app.use(bodyParser.json());
 
@@ -17,11 +16,8 @@ app.post(`/api/webhook/${token}`, (req, res) => {
   res.sendStatus(200);
 });
 
-const server = http.createServer(app);
-const port = process.env.PORT || 3000;
-
-server.listen(PORT, async (err) => {
-	console.log(`Server is running on port ${port}`);
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
 
 bot.setWebHook(`${webhookUrl}/api/webhook/${token}`);
@@ -35,3 +31,4 @@ bot.on('message', (msg) => {
 });
 
 console.log('Бот запущен!');
+module.exports = app;
