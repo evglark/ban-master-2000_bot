@@ -1,6 +1,6 @@
 const { Telegraf } = require('telegraf');
 
-const bot = new Telegraf(process.env.BOT_TOKEN);
+const bot = new Telegraf('6409534713:AAEnHxLbb7OF_JC0nY5dHTN4Ff4vrkUEQtI');
 
 bot.start((ctx) => {
   ctx.reply('Привет! Я чат-бот на Node.js.');
