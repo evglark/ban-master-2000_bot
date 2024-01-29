@@ -3,8 +3,7 @@ const bodyParser = require('body-parser');
 const TelegramBot = require('node-telegram-bot-api');
 
 const token = '6409534713:AAEnHxLbb7OF_JC0nY5dHTN4Ff4vrkUEQtI';
-const webhookUrl = 'https://ban-master-2000-ky93rusgi-evglarks-projects.vercel.app/';
-// https://ban-master-2000-bot.vercel.app/
+const webhookUrl = 'https://ban-master-2000-bot.vercel.app/';
 
 const app = express();
 const port = process.env.PORT || 3000;
